@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primario: #fff;
+  --fondo: #87bfdf;
+  --fondo-sobre: #1012a7;
+  --solapa-sobre: #2d49e2;
+  --cuerpo-sobre: #2833cf;
+  --sombra: rgba(0, 0, 0, 0.2);
+  --texto: #000000;
+  --corazon: #ff477e;
+}
+
+body {
+  background: var(--fondo);
+  font-family: "Times New Roman", Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 48px;
+  color: #444;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -------- SOBRE -------- */
+.envoltura-sobre {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: var(--fondo-sobre);
+  box-shadow: 0 0 40px var(--sombra);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.8s ease;
+}
+
+.envoltura-sobre.abierto {
+  transform: translateY(-60px);
+}
+
+/* Solapa superior rectangular */
+.solapa-superior {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 150px;
+  background-color: var(--solapa-sobre);
+  transform-origin: top center;
+  transition: transform 0.8s ease;
+  z-index: 4;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.envoltura-sobre.abierto .solapa-superior {
+  transform: rotateX(180deg);
+}
+
+/* Solapas laterales */
+.solapa-izquierda,
+.solapa-derecha {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent;
+  z-index: 1;
+}
+
+.solapa-izquierda {
+  left: 0;
+  border-left: 200px solid var(--cuerpo-sobre);
+}
+
+.solapa-derecha {
+  right: 0;
+  border-right: 200px solid var(--cuerpo-sobre);
+}
+
+/* Parte inferior del sobre */
+.sobre {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: var(--cuerpo-sobre);
+  z-index: 2;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Luna decorativa */
+.luna {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #f5f3ce;
+  border-radius: 50%;
+  box-shadow: -10px 0 0 0 #2e3a59;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+}
+
+.envoltura-sobre.abierto .luna {
+  animation: pulsar 0.6s ease-in-out;
+  animation-iteration-count: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes pulsar {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* -------- CARTA -------- */
+.carta {
+  width: 100%;
+  background-color: var(--primario);
+  box-shadow: 0 0 5px var(--sombra);
+  border-radius: 10px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+  margin-top: 20px;
+  transition: all 0.5s ease;
+}
+
+.carta.abierta {
+  opacity: 1;
+  max-height: 1200px; /* Ajustable según contenido */
+  pointer-events: auto;
+}
+
+/* Contenido dentro de la carta */
+.contenido {
+  padding: 15px;
+  font-size: 18px;
+  color: var(--texto);
+  line-height: 1.6;
+  border: 2px dashed var(--texto);
+  background: #f7f4f4;
+  border-radius: 10px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.contenido strong {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
