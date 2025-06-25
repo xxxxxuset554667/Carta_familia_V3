@@ -116,9 +116,9 @@ h1 {
   left: 50%;
   width: 40px;
   height: 40px;
-  background-color: #fff200;
+  background-color: #2e3a59;
   border-radius: 50%;
-  box-shadow: -10px 0 0 0 #2e3a59;
+  box-shadow: -10px 0 0 0 #fff200;
   transform: translate(-50%, -50%);
   z-index: 5;
   cursor: pointer;
